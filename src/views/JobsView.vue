@@ -1,6 +1,9 @@
 <template>
   <main>
-    <section v-for="user in this.$store.state.jobs">{{ user.id }}</section>
+    <section v-for="job in this.$store.state.jobs">
+      <a :href="job.url">{{ job.title }}</a>
+      <small>{{ job.time_ago }}{{ job.domain }}</small>
+    </section>
   </main>
 </template>
 
