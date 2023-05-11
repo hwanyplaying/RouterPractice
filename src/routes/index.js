@@ -5,6 +5,9 @@ import NewsView from "../views/NewsView.vue";
 import JobsView from "@/views/JobsView.vue";
 import ItemView from "@/views/ItemView.vue";
 import UserView from "@/views/UserView.vue";
+import createListView from "@/views/CreateListView";
+import bus from "@/utils/bus";
+import {store} from "@/store";
 
 Vue.use(VueRouter);
 
@@ -17,15 +20,62 @@ export const router = new VueRouter({
         },
         {
             path: '/news',
-            component: NewsView
+            name: 'news',
+            component: NewsView,
+            beforeEnter: (to, from, next) => {
+                bus.$emit('start:spinner');
+                store.dispatch('FETCH_LIST', to.name)
+                    .then(() => {
+                        console.log(to.name, 'fetched');
+                        next();
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+                /*console.log('to', to);
+                console.log('from', from);
+                console.log(next);
+                next();*/
+            }
+            // component: createListView('NewsView')
         },
         {
             path: '/ask',
-            component: AskView
+            name: 'ask',
+            component: AskView,
+            beforeEnter: (to, from, next) => {
+                bus.$emit('start:spinner');
+                store.dispatch('FETCH_LIST', to.name)
+                    .then(() => {
+                        console.log(to.name, 'fetched');
+                        next();
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+                /*console.log('to', to);
+                console.log('from', from);
+                console.log(next);
+                next();*/
+            }
+            // component: createListView('AskView')
         },
         {
             path: '/jobs',
-            component: JobsView
+            name: 'jobs',
+            component: JobsView,
+            beforeEnter: (to, from, next) => {
+                bus.$emit('start:spinner');
+                store.dispatch('FETCH_LIST', to.name)
+                    .then(() => {
+                        console.log(to.name, 'fetched');
+                        next();
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            }
+            // component: createListView('JobsView')
         },
         {
             path: '/user/:id',

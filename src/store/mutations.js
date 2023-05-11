@@ -13,5 +13,8 @@ export default {
     },
     SET_askINFO(state, id) {
         state.id = id;
+    },
+    SET_LIST(state, list) {
+        state.list = list;
     }
 }

@@ -20,18 +20,31 @@ function fetchAskList() {
     return axios.get(`${config.baseUrl}ask/1.json`);
 }
 
+/*function fetchList(pageName) {
+    return axios.get(`${config.baseUrl}${pageName}/1.json`);
+}*/
+
+async function fetchList(pageName) {
+    try {
+        const res = await axios.get(`${config.baseUrl}${pageName}/1.json`);
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 function fetchUserInfo(username) {
-    return axios.get(`${config.baseUrl}user/${username}.json`)
+    return axios.get(`${config.baseUrl}user/${username}.json`);
 }
 
 function fetchAskInfo(userid) {
-    return axios.get(`${config.baseUrl}item/${userid}.json`)
+    return axios.get(`${config.baseUrl}item/${userid}.json`);
 }
-
 export {
     fetchNewsList,
     fetchJobsList,
     fetchAskList,
     fetchUserInfo,
-    fetchAskInfo
+    fetchAskInfo,
+    fetchList
 }

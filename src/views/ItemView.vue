@@ -1,7 +1,11 @@
 <template>
   <div>
     <section>
-      <div class="user-container">
+      <user-profile :info="askInfo">
+        <div slot="username">{{ askInfo.user }}</div>
+        <template slot="time">{{ askInfo.time_ago }}</template>
+      </user-profile>
+<!--      <div class="user-container">
         <div>
           <i class="fas fa-user"></i>
         </div>
@@ -15,13 +19,15 @@
             {{ askInfo.time_ago }}
           </div>
         </div>
-      </div>
-      <h2>{{ askInfo.title }}</h2>
+      </div>-->
     </section>
 <!--    <p>{{ askInfo.title }}</p>
         <div>
           {{ askInfo.content }}
         </div>-->
+    <section>
+      <h2>{{ askInfo.title }}</h2>
+    </section>
     <section>
       <div v-html="askInfo.content">
 <!--        {{ askInfo.content }}-->
@@ -33,8 +39,11 @@
 
 <script>
 
+import UserProfile from "@/components/UserProfile.vue";
+
 export default {
   name: "ItemView",
+  components: {UserProfile},
   computed: {
     askInfo() {
       return this.$store.state.id;
@@ -50,20 +59,5 @@ export default {
 </script>
 
 <style scoped>
-.user-container {
-  display: flex;
-  align-items: center;
-}
 
-.fa-user {
-  font-size: 2.5rem;
-}
-
-.user-description {
-  padding-left: 8px;
-}
-
-.time {
-  font-size: 0.7rem;
-}
 </style>

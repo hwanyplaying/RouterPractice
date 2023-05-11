@@ -1,66 +1,18 @@
 <template>
   <div>
-    <ul class="news-list">
-      <li v-for="item in this.$store.state.news" class="post">
-<!--        포인트 영역 -->
-        <div class="points">
-          {{ item.points }}
-        </div>
-<!--        기타 정보 영역 -->
-        <div>
-          <p class="news-title">
-            <a :href="item.url">
-              {{ item.title }}
-            </a>
-          </p>
-
-          <small class="user-text">
-            {{ item.time_ago }} by
-            <router-link :to="`/user/${item.user}`">{{ item.user }}</router-link>
-          </small>
-        </div>
-<!--    <a :href="item.url">
-          {{ item.title }}
-        </a>
-
-        <small>
-          {{ item.time_ago }} by
-          <router-link :to="`/user/${item.user}`">{{ item.user }}</router-link>
-        </small>-->
-      </li>
-    </ul>
-<!--    <section v-for="item in this.$store.state.news">
-      <a :href="item.url">{{ item.title }}</a>
-      <small>
-        {{ item.time_ago }} by
-&lt;!&ndash;        <router-link :to="'/user/' + item.user">{{ item.user }}</router-link>&ndash;&gt;
-        <router-link :to="`/user/${item.user}`">{{ item.user }}</router-link>
-      </small>
-      &lt;!&ndash;    <section v-for="user in users">{{user.title}}</section>&ndash;&gt;
-    </section>-->
-
+    <list-item></list-item>
   </div>
 </template>
 
 <script>
-// import {fetchNewsList} from "@/api";
+import ListItem from "@/components/ListItem.vue";
+import ListMixins from "@/mixins/ListMixins";
 export default {
   name: "NewsView",
-  // data() {
-  //   return {
-  //     users: []
-  //   }
-  // },
-  created() {
-    this.$store.dispatch('FETCH_NEWS');
-    // fetchNewsList()
-    //     .then(res => {
-    //       this.users = res.data;
-    //     })
-    //     .catch(error => {
-    //       console.log(error);
-    //     });
-  }
+  mixins: [ListMixins],
+  components: {
+    ListItem
+  },
 }
 </script>
 
